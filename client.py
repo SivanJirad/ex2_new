@@ -259,9 +259,9 @@ class MyHandler(FileSystemEventHandler):
 
     def on_deleted(self, event):
         print("delete")
-        str = event.src_path.replace(self.path_folder_client, "")
-        print(str)
-        self.dict_change["delete"].append(self.client_id + str)
+        new_string = event.src_path.replace(self.path_folder_client, "")
+        print(new_string)
+        self.dict_change["delete"].append(self.client_id + new_string)
 
     def on_modified(self, event):
         print(f"hey buddy, {event.src_path} has been modified")
@@ -281,8 +281,8 @@ class MyHandler(FileSystemEventHandler):
             # if the name of the file was changed, and the file didn't only move
             dest_path_arr = event.dest_path.split(os.sep)
             src_path_arr = event.src_path.split(os.sep)
-            lenn = len(src_path_arr)
-            if src_path_arr[lenn - 1] != dest_path_arr[lenn - 1]:
+            len_src_path_arr = len(src_path_arr)
+            if src_path_arr[len_src_path_arr - 1] != dest_path_arr[len_src_path_arr - 1]:
                 print(f"ok ok ok, someone moved {event.src_path} to {event.dest_path}")
                 self.dict_change["rename_file"].append([event.src_path, event.dest_path])
                 self.flag_rename_file = 1

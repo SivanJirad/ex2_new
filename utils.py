@@ -5,6 +5,7 @@ import string
 
 BUFFER_SIZE = 4096
 
+
 def send_massage(massage, sock):
   sock.send(bytes(massage, "utf-8"))
   sock.recv(BUFFER_SIZE)
@@ -94,9 +95,9 @@ def pull_all_files(path, client_socket):
 
 def delete_a_single_file_or_folder(start_path, end_path):
     new_path = os.path.join(start_path, end_path)
-    if (os.path.isfile(new_path)):
+    if os.path.isfile(new_path):
         os.remove(new_path)
-    if (os.path.isdir(new_path)):
+    if os.path.isdir(new_path):
         for root, dirs, files in os.walk(new_path, topdown=False):
             for file in files:
                 os.remove(os.path.join(root, file))
@@ -138,12 +139,3 @@ def make_folder(path):
 
 def send_client_id(sock, client_id):
     sock.send(bytes(client_id, "utf-8"))
-
-
-
-
-
-
-
-
-
